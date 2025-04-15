@@ -7,6 +7,7 @@ RUN apt-get update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 WORKDIR /app
+
 COPY package.json ./
 RUN npm install
 
@@ -21,8 +22,13 @@ FROM python:3.10-slim AS final
 WORKDIR /app
 
 COPY --from=scraper /app/scraped_data.json ./
+
 COPY server.py requirements.txt ./
+COPY templates/ ./templates/
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
+
 CMD ["python", "server.py"]
+
