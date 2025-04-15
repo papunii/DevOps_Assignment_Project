@@ -1,7 +1,7 @@
 FROM node:18-slim AS scraper
 
 RUN apt-get update && \
-    apt-get install -y chromium chromium-fonts && \
+    apt-get install -y chromium chromium-common chromium-driver fonts-liberation && \
     rm -rf /var/lib/apt/lists/*
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
