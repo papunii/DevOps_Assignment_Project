@@ -1,3 +1,4 @@
+# ---------- Stage 1: Node.js Scraper ----------
 FROM node:18-slim AS scraper
 
 RUN apt-get update && \
@@ -17,6 +18,7 @@ ENV SCRAPE_URL=${SCRAPE_URL}
 
 RUN node scrape.js
 
+# ---------- Stage 2: Python Flask App ----------
 FROM python:3.10-slim AS final
 
 WORKDIR /app
